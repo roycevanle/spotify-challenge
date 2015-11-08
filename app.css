@@ -1,0 +1,7 @@
+body {
+  padding:10px;
+}
+#chart_div {
+    display: table; /*can be in percentage also.*/
+    margin: 0 auto;
+}
