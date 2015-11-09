@@ -10,7 +10,13 @@ var myCtrl = myApp.controller('myCtrl', function($scope, $http) {
   //To get song data
   $scope.getSongs = function() {
     $http.get(baseUrl + $scope.track).success(function(response){
-      data = $scope.tracks = response.tracks.items 
+      data = $scope.tracks = response.tracks.items
+      //Makes sure results show each time something is searched
+      $("#result").show();
+      //Makes sure the popuar calculation is hidden when searching
+      $("#popular").hide();
+      //Depopulates all elements in the popular class for future population
+      $("#popular").html("");
     })
   }
 
@@ -31,33 +37,54 @@ var myCtrl = myApp.controller('myCtrl', function($scope, $http) {
 
   //Shows popular statement
   $scope.popular = function(popular, songName, artists) {
+
+    //Hides the result of search when user specifies song
     $("#result").hide();
+
+    //Shows the popularity result of their specified song
+    $("#popular").show();
+
+    //Appends div for the chart that will be drawn
+    $("#popular").append("<div id='chart_div'></div");
+
+    //Appends popularity message to user
     $("#popular").append("<p>On a popularity scale of 0-100, " + songName + " by " + artists + " is a " + popular + "</p>");
-    console.log(popular);
-    console.log(songName);
-    console.log(artists);
+    if (popular < 51) {
+      $("#popular").append("<p>Your music taste is not 'in' at all! Your music is underground!</p>");
+    }else if ( 50 < popular && popular < 81) {
+      $("#popular").append("<p>Your music taste is almost 'in'! Your music is halfway above ground!</p>");
+    }else if (popular > 80) {
+      $("#popular").append("<p>Your music taste is totally 'in'! Your music is above ground, mainstream!</p>");
+    }
+
+    //Appends a play button for t
+
+    //calls drawchart method to draw a chart based on popularity of song
     drawChart(popular);
+
+    //Resets the field for a new search
+    $('#search').val("");
   }
 
   //Draw chart
   function drawChart(popularity) {
-      var popData = google.visualization.arrayToDataTable([
-           ['Popularity', popularity],
-      ], true);
+    //Sets array for chart components
+    var popData = google.visualization.arrayToDataTable([
+         ['Popularity', popularity],
+    ], true);
 
-      var options = {
-          width: 300, height: 120,
-          minorTicks: 5
-      };
+    //Sets attributes for how chart will look
+    var options = {
+        width: 500, height: 220,
+        redFrom: 80, redTo: 100,
+        yellowFrom: 50, yellowTo:80,
+        minorTicks: 5
+    };
 
-      var chart = new google.visualization.Gauge(document.getElementById('chart_div'));
-      chart.draw(popData, options);
+    //Creates the new chart based on set attributes
+    var chart = new google.visualization.Gauge(document.getElementById('chart_div'));
+    chart.draw(popData, options);
   }
 
-}) //Ends controller
+}) 
 
-
-// Add tool tips to anything with a title property
-$('body').tooltip({
-    selector: '[title]'
-});

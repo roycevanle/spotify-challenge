@@ -1,7 +1,60 @@
-body {
-  padding:10px;
-}
+/* Imports Open Sans Font */
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,800);
+
+/* Centers the gauge display */
 #chart_div {
     display: table; /*can be in percentage also.*/
     margin: 0 auto;
+}
+
+/* Makes the text of the result a header */
+#popular {
+    font-size: 20px;
+    font-family: "Open Sans", sans-serif;
+    font-style: italic;
+    box-shadow: 5px 5px 2px #707070;
+    background-color: #E8E8E8;
+    border-radius: 10px;
+    margin: 3em;
+
+}
+
+/* Changes the cursor when you hover over it */
+.pointer {
+    cursor: pointer;
+}
+
+/* Makes the popular text white */
+#result {
+    color: black;
+}
+
+/* Makes header of website bold */
+h1 {
+    font-weight: bold;
+} 
+
+/* Makes the body background different */
+body {
+    background-image: url("BlackBackground.jpg");
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    color: black;
+    font-family: "Open Sans", sans-serif;
+}
+
+/* Removes default padding on ul and centers the text */
+ul {
+    padding: 0px;
+}
+
+/* Makes a footer about where the data comes from */
+footer {
+    position:fixed;
+    bottom:0;
+    background-color: black;
+    width: 100%;
+    color: #C8C8C8;
+    text-align: center;
 }
