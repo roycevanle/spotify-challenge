@@ -7,6 +7,9 @@ var myApp = angular.module('myApp', [])
 var myCtrl = myApp.controller('myCtrl', function($scope, $http) {
   $scope.audioObject = {}
 
+  //Hides the Stop Track Preview button initially
+  $("#masterPopular").hide();
+
   //To get song data
   $scope.getSongs = function() {
     $http.get(baseUrl + $scope.track).success(function(response){
@@ -14,7 +17,7 @@ var myCtrl = myApp.controller('myCtrl', function($scope, $http) {
       //Makes sure results show each time something is searched
       $("#result").show();
       //Makes sure the popuar calculation is hidden when searching
-      $("#popular").hide();
+      $("#masterPopular").hide();
       //Depopulates all elements in the popular class for future population
       $("#popular").html("");
     })
@@ -23,15 +26,15 @@ var myCtrl = myApp.controller('myCtrl', function($scope, $http) {
   //To play snip of song
   $scope.play = function(song) {
     if($scope.currentSong == song) {
-      $scope.audioObject.pause()
-      $scope.currentSong = false
+      $scope.audioObject.pause();
+      $scope.currentSong = false;
       return
     }
     else {
-      if($scope.audioObject.pause != undefined) $scope.audioObject.pause()
+      if($scope.audioObject.pause != undefined) $scope.audioObject.pause();
       $scope.audioObject = new Audio(song);
-      $scope.audioObject.play()
-      $scope.currentSong = song
+      $scope.audioObject.play();
+      $scope.currentSong = song;
     }
   }
 
@@ -42,7 +45,7 @@ var myCtrl = myApp.controller('myCtrl', function($scope, $http) {
     $("#result").hide();
 
     //Shows the popularity result of their specified song
-    $("#popular").show();
+    $("#masterPopular").show();
 
     //Appends div for the chart that will be drawn
     $("#popular").append("<div id='chart_div'></div");
@@ -56,8 +59,6 @@ var myCtrl = myApp.controller('myCtrl', function($scope, $http) {
     }else if (popular > 80) {
       $("#popular").append("<p>Your music taste is totally 'in'! Your music is above ground, mainstream!</p>");
     }
-
-    //Appends a play button for t
 
     //calls drawchart method to draw a chart based on popularity of song
     drawChart(popular);

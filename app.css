@@ -3,12 +3,12 @@
 
 /* Centers the gauge display */
 #chart_div {
-    display: table; /*can be in percentage also.*/
+    display: table;
     margin: 0 auto;
 }
 
 /* Makes the text of the result a header */
-#popular {
+#masterPopular {
     font-size: 20px;
     font-family: "Open Sans", sans-serif;
     font-style: italic;
@@ -16,7 +16,6 @@
     background-color: #E8E8E8;
     border-radius: 10px;
     margin: 3em;
-
 }
 
 /* Changes the cursor when you hover over it */
@@ -58,3 +57,24 @@ footer {
     color: #C8C8C8;
     text-align: center;
 }
+
+/* On screens 768px and bigger search font-size is bigger */
+@media screen and (min-width: 768px) {
+    .search {
+        font-size: 17px;
+    }
+}
+
+/* On screens 768 and smaller, visibility of footer is hidden, header is smaller, and search text is centered */
+@media screen and (max-width: 768px) {
+    footer {
+        visibility: hidden;
+    } 
+    h1 {
+        font-size: 20px;
+    }
+    .search {
+        text-align: center;
+    }
+}
+
